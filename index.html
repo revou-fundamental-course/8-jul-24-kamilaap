@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3feb8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .box {
+            padding: 20px;
+            flex: 1;
+            margin: 10px;
+            border: 1px solid #ffb22c;
+            border-radius: 8px;
+            background-color: #cff4c4;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bmi-calculator, .bmi-result {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .bmi-calculator h1, .bmi-result h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1b3c73;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #ff407d;
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        input[type="number"], button {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            color: #17153b;
+        }
+
+        button {
+            background-color: #40679e;
+            color: #ffffff;
+            cursor: pointer;
+            margin-top: 10px;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #1b3c73;
+        }
+
+        .features {
+            margin-top: 20px;
+        }
+
+        .features h3 {
+            margin-bottom: 10px;
+            color: #1b3c73;
+        }
+
+        .features ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+        }
+
+        .result-box h2 {
+            text-align: center;
+            color: #1b3c73;
+            margin-bottom: 10px;
+        }
+
+        .result-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result-buttons button {
+            background-color: #40679e;
+            color: #ffffff;
+            cursor: pointer;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .result-buttons button:hover {
+            background-color: #1b3c73;
+        }
+
+        .health-risks ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .download-app {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold; /* Teks tebal */
+        }
+
+        .download-app p {
+            margin-bottom: 10px; /* Jarak antara teks dan gambar */
+        }
+
+        .download-app img {
+            width: 150px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bmi-calculator box">
+            <h1>Kalkulator BMI</h1>
+            <p>Berat badan ideal adalah impian semua orang. Tidak hanya memiliki bentuk tubuh yang menunjang penampilan, berat badan ideal juga menandakan kondisi tubuh yang sehat. Bagaimana denganmu? Yuk, hitung sekarang di kalkulator BMI.</p>
+            <form id="bmiForm">
+                <div class="form-group">
+                    <label for="gender">Jenis Kelamin:</label>
+                    <div class="gender-options">
+                        <input type="radio" id="male" name="gender" value="Laki-Laki" checked> Pria
+                        <input type="radio" id="female" name="gender" value="Wanita"> Wanita
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="weight">Berat Badan (kg):</label>
+                    <input type="number" id="weight" name="weight" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Usia (tahun):</label>
+                    <input type="number" id="age" name="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="height">Tinggi Badan (cm):</label>
+                    <input type="number" id="height" name="height" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" onclick="calculateBMI()">Hitung BMI</button>
+                    <button type="reset" onclick="resetForm()">Reset</button>
+                </div>
+            </form>
+            <div class="features">
+                <h3>Keunggulan fitur</h3>
+                <ul>
+                    <li>Menghitung berat badan</li>
+                    <li>Menentukan kategori berat badan ideal atau tidak</li>
+                    <li>Mempersiapkan program penurunan berat badan</li>
+                </ul>
+                <p>Kalkulator ini hanya boleh digunakan oleh orang dewasa (wanita hamil atau menyusui tidak boleh menggunakan pembacaan BMI ini) dan tidak ada tindakan yang harus diambil berdasarkan nilainya selain berkonsultasi dengan orang yang memenuhi syarat seperti dokter.</p>
+                <p>Kalkulator akan memberi Anda gambaran tentang perbandingan berat badan Anda dengan nilai umum. Indeks Massa Tubuh (atau BMI) dihitung sebagai berat badan Anda (dalam kilogram) dibagi dengan kuadrat tinggi badan Anda (dalam meter) atau BMI = Kg/M<sup>2</sup>.</p>
+            </div>
+        </div>
+        <div class="bmi-result box" id="resultContainer" style="display: none;">
+            <div class="result-box">
+                <h2>Hasil</h2>
+                <div id="result">
+                    <div class="bmi-info">
+                        <p id="bmiValue">Berat Badan Lebih</p>
+                        <p id="bmiScore">24.7</p>
+                        <p id="bmiCategory">Anda memiliki berat badan berlebih</p>
+                    </div>
+                    <div class="advice">
+                        <h3>Kelebihan berat badan</h3>
+                        <p>Hasil BMI di antara 23 dan 25. Anda berada dalam kategori overweight atau berat badan berlebih.</p>
+                        <button>Konsultasi Ahli Gizi</button>
+                        <button>Registrasi Online Ahli Gizi</button>
+                    </div>
+                    <div class="health-risks">
+                        <h3>Beberapa penyakit yang berasal dari kegemukan</h3>
+                        <ul>
+                            <li>Diabetes</li>
+                            <li>Hipertensi</li>
+                            <li>Sakit Jantung</li>
+                            <li>Osteoarthritis</li>
+                        </ul>
+                        <button>Konsultasi Dokter</button>
+                        <button>Registrasi Online Sekarang</button>
+                    </div>
+                    <div class="download-app">
+                        <p>Download Aplikasi</p>
+                        <img src="google-play.png" alt="Google Play Store">
+                        <img src="app-store.png" alt="Apple App Store">
+                    </div>
+                </div>
+                <div class="result-buttons">
+                    <button id="downloadResult" onclick="downloadResult()">Download Hasil BMI</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
